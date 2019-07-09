@@ -31,3 +31,11 @@ class User < ApplicationRecord
     self.followings.include?(other_user)
   end
 end
+
+#following_ids は User モデルの has_many :followings, ... によって自動的に生成されるメソッド
+#User がフォローしている User の id の配列を取得
+#Micropost.where(user_id: フォローユーザ + 自分自身)
+#モデル.where(条件)データベースから条件を指定し、条件に当てはまるレコードをすべて取得する
+ def feed_microposts
+    Micropost.where(user_id: self.following_ids + [self.id])
+ end
