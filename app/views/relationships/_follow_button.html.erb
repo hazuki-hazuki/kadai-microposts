@@ -1,0 +1,21 @@
+<% unless current_user == user %>
+  <% if current_user.following?(user) %>
+<!--アンフォローボタン--!>
+<!--type="hidden" はユーザに見せないフォームの隠しデータ,
+<!--hidden_field_tag :follow_id, user.id は input type="hidden" name="follow_id" value="ユーザの id" を生成--!>
+<!--フォームで POST 以外のメソッドを使用したい場合には method: :delete のように指定--!>
+<!--current_user は、現在ログインしているユーザを取得するメソッド--!>
+<!--form_with(   )のところまでで作成した フォームについての取扱をfという変数で実施--!>
+    <%= form_with(model: current_user.relationships.find_by(follow_id: user.id), local: true, method: :delete) do |f| %>
+      <%= hidden_field_tag :follow_id, user.id %>
+      <%= f.submit 'Unfollow', class: 'btn btn-danger btn-block' %>
+    <% end %>
+    
+  <% else %>
+<!--フォローボタン,表示している user が自分自身ではなく、フォローしていない場合に表示される--!>
+    <%= form_with(model: current_user.relationships.build, local: true) do |f| %>
+      <%= hidden_field_tag :follow_id, user.id %>
+      <%= f.submit 'Follow', class: 'btn btn-primary btn-block' %>
+    <% end %>
+  <% end %>
+<% end %>
