@@ -15,8 +15,20 @@ Rails.application.routes.draw do
     end
   end
   
+#中間テーブル先のお気に入り中のfavorite一覧表示ページのためのルーティング  
+  resources :favorites, only: [:index, :show, :new, :create] do
+    member do
+      get :favoritings
+    end
+  end
+  
   resources :microposts, only: [:create, :destroy]
   
 #ログインユーザがユーザをフォロー／アンフォローできるようにするルーティング
   resources :relationships, only: [:create, :destroy]
+
+#ログインユーザがmicropostをfavorite／unfavoriteできるようにするルーティング
+  resources :favorites, only: [:create, :destroy]
+  
+  
 end
