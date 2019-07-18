@@ -9,7 +9,7 @@ class User < ApplicationRecord
     has_many :relationships
     has_many :favorites
     
-    #自分がフォローしている User・micropost達を取得
+    #自分がフォロー/お気に入りしている User・micropost達を取得
     has_many :favoritings, through: :favorites, source: :micropost
     has_many :followings, through: :relationships, source: :follow
    
