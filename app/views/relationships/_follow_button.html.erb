@@ -5,7 +5,7 @@
 <!--hidden_field_tag :follow_id, user.id は input type="hidden" name="follow_id" value="ユーザの id" を生成--!>
 <!--フォームで POST 以外のメソッドを使用したい場合には method: :delete のように指定--!>
 <!--current_user は、現在ログインしているユーザを取得するメソッド--!>
-<!--form_with(   )のところまでで作成した フォームについての取扱をfという変数で実施--!>rai
+<!--form_with(   )のところまでで作成した フォームについての取扱をfという変数で実施--!>
     <%= form_with(model: current_user.relationships.find_by(follow_id: user.id), local: true, method: :delete) do |f| %>
       <%= hidden_field_tag :follow_id, user.id %>
       <%= f.submit 'Unfollow', class: 'btn btn-danger btn-block' %>
