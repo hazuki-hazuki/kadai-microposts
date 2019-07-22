@@ -1,0 +1,13 @@
+<% if current_user.favoriting?(micropost)%>
+    <%= form_with(model: current_user.favorites.find_by(micropost_id: micropost.id), local: true, method: :delete) do |f| %>
+      <%= hidden_field_tag :micropost_id, micropost.id %>
+      <%= f.submit 'unfavorite', class: 'btn btn-danger' %>
+    <% end %>
+<% else %>
+    <%= form_with(model: current_user.favorites.build, local: true) do |f| %>
+      <%= hidden_field_tag :micropost_id, micropost.id %>
+      <%= f.submit 'favorite', class: 'btn btn-primary' %>
+    <% end %>
+<% end %>
+
+<!--User.find_by(name: "山田")　usersテーブルのnameカラムが山田のものと一致する最初の一件のインスタンスを返す--!>

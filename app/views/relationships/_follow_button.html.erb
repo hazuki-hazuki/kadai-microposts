@@ -1,3 +1,4 @@
+<!--現在ログインしているユーザーとユーザが同じでない時に処理が実行される--!>
 <% unless current_user == user %>
   <% if current_user.following?(user) %>
 <!--アンフォローボタン--!>

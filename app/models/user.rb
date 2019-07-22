@@ -64,10 +64,10 @@ class User < ApplicationRecord
     favorite.destroy if favorite
  end
 
-#お気に入りしている micropost:id達を取得,favorite_micropostが含まれていないかを確認
+#お気に入りしている micropost:id達を取得,favoritingsが含まれていないかを確認
 #含まれている場合には、true,含まれていない場合には、false
- def favoriting?(favorite_micropost)
-    self.favoritings.include?(favorite_micropost)
+ def favoriting?(micropost)
+    self.favoritings.include?(micropost)
  end
  
 #ユーザが追加したお気に入りを一覧表示する
